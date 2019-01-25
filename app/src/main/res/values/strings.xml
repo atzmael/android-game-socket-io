@@ -1,0 +1,24 @@
+<resources>
+    <string name="game_name">Epic Game</string>
+    <string name="btn_connect">Connect</string>
+    <string name="username_hint">Nom d\'utilisateur</string>
+    <string name="app_name">clientapp</string>
+    <string name="btn_action1_txt">Button</string>
+    <string name="btn_action2_txt">Button</string>
+    <string name="room_id_txt">Identifiant de la room</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="track_zone">Track</string>
+    <string name="bg_img">Background Image</string>
+    <string name="disconnection_btn">Disconnection button</string>
+    <string name="field_pseudo_txt">Pseudo</string>
+    <string name="disconnect_btn_desc">Disconnect button image</string>
+    <string name="life_icon_1_desc">Life icon 1</string>
+    <string name="life_icon_2_desc">Life icon 2</string>
+    <string name="life_icon_3_desc">Life icon 3</string>
+    <string name="loose_icon_desc">Loose icon</string>
+    <string name="txt_rank_sep_txt">/</string>
+    <string name="txt_rank_txt">Rank :</string>
+    <string name="txt_rank_nb_player_txt">0</string>
+    <string name="txt_rank_place_txt">0</string>
+</resources>
