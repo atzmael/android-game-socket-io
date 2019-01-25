@@ -1,8 +1,8 @@
 <resources>
-    <string name="game_name">Epic Game</string>
+    <string name="game_name">Hyper Stripped Lightning Arena</string>
     <string name="btn_connect">Connect</string>
     <string name="username_hint">Nom d\'utilisateur</string>
-    <string name="app_name">HYPER Stripped Lightning ARENA</string>
+    <string name="app_name">HSLA</string>
     <string name="btn_action1_txt">Button</string>
     <string name="btn_action2_txt">Button</string>
     <string name="room_id_txt">Identifiant de la room</string>

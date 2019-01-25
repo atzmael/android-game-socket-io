@@ -195,6 +195,12 @@ public class GameController extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        activity.backHome();
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        activity.backHome();
     }
 
     /**
@@ -235,6 +241,9 @@ public class GameController extends Fragment {
                     lifeHandler(lifeNumber);
                     trackView.setBackgroundColor(color);
                     trackViewImg.setVisibility(View.INVISIBLE);
+
+                    btnFire.setBackgroundColor(color);
+                    btnFire.setEnabled(true);
                 }
             });
         }
