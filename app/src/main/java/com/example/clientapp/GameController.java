@@ -116,23 +116,6 @@ public class GameController extends Fragment {
                     float currclientX = event.getX();
                     float currclientY = event.getY();
 
-                    //Log.d(LOG_TAG, String.valueOf(event.getX()));
-                    //Log.d(LOG_TAG, String.valueOf(event.getY()));
-
-                    /*
-                    if (currclientX < trackView.getWidth() / 2) {
-                        clientX = -1;
-                    }else if(currclientX > trackView.getWidth() / 2) {
-                        clientX = 1;
-                    }
-
-                    if(currclientY < trackView.getHeight() / 2){
-                        clientY = -1;
-                    }else if(currclientY > trackView.getWidth() / 2) {
-                        clientY = 1;
-                    }
-                    */
-
                     clientX = (currclientX / trackView.getWidth()) * 2 - 1;
                     clientY = (currclientY / trackView.getHeight()) * 2 - 1;
                 }
@@ -183,6 +166,7 @@ public class GameController extends Fragment {
         txtRankPlace.setTextColor(color);
         disconnectBtn.setColorFilter(color);
         btnFire.setBackgroundColor(color);
+        btnFire.setEnabled(true);
 
         lifeHandler(lifeNumber);
 
@@ -291,6 +275,9 @@ public class GameController extends Fragment {
             trackView.setBackgroundColor(inactiveColor);
             trackViewImg.setVisibility(View.VISIBLE);
 
+            btnFire.setBackgroundColor(inactiveColor);
+            btnFire.setEnabled(false);
+
             Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -304,7 +291,16 @@ public class GameController extends Fragment {
 
     public void fireRocket() {
         mSocket.emit("client_rocket");
-        //btnFire.setBackgroundColor(inactiveColor);
-        //btnFire.setEnabled(false);
+        btnFire.setBackgroundColor(inactiveColor);
+        btnFire.setEnabled(false);
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        btnFire.setBackgroundColor(color);
+                        btnFire.setEnabled(true);
+                    }
+                },
+                3000);
     }
 }
