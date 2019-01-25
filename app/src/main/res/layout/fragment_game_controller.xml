@@ -7,6 +7,20 @@
     android:background="#1A012D"
     tools:context=".GameController">
 
+    <ImageView
+        android:id="@+id/bg_img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/bg_img"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <View
         android:id="@+id/track_zone"
         android:layout_width="0dp"
@@ -65,12 +79,12 @@
         android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/icon_life_inactive"
         android:contentDescription="@string/life_icon_1_desc"
+        android:src="@drawable/icon_life_inactive"
         app:layout_constraintBottom_toTopOf="@+id/track_zone"
         app:layout_constraintEnd_toStartOf="@+id/life_icon_2"
         app:layout_constraintHorizontal_bias="1.0"
@@ -83,12 +97,12 @@
         android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/icon_life_inactive"
         android:contentDescription="@string/life_icon_2_desc"
+        android:src="@drawable/icon_life_inactive"
         app:layout_constraintBottom_toTopOf="@+id/track_zone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,12 +114,12 @@
         android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/icon_life_inactive"
         android:contentDescription="@string/life_icon_3_desc"
+        android:src="@drawable/icon_life_inactive"
         app:layout_constraintBottom_toTopOf="@+id/track_zone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -185,5 +199,25 @@
             app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_fire"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/InactiveElements"
+        android:text="@string/btn_fire_txt"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/track_zone_img" />
 
 </android.support.constraint.ConstraintLayout>

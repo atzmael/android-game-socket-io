@@ -1,6 +1,5 @@
 package com.example.clientapp;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -74,8 +73,6 @@ public class MainActivity extends FragmentActivity implements Login.OnFragmentIn
                     JSONObject data = (JSONObject) args[0];
 
                     boolean confirm = false;
-                    Float color = null;
-                    int rank = 0;
 
                     try {
                         confirm = data.getBoolean("confirm");
@@ -122,7 +119,7 @@ public class MainActivity extends FragmentActivity implements Login.OnFragmentIn
 
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction() {
     }
 
     // GETTEUR

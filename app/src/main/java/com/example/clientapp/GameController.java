@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +53,7 @@ public class GameController extends Fragment {
     private View trackView;
     private ImageView trackViewImg;
     private TextView txtRankPlace;
+    private Button btnFire;
 
     private OnFragmentInteractionListener mListener;
 
@@ -67,7 +69,7 @@ public class GameController extends Fragment {
      * @return A new instance of fragment GameController.
      */
     // TODO: Rename and change types and number of parameters
-    public static GameController newInstance(String param1, String param2) {
+    public static GameController newInstance() {
         GameController fragment = new GameController();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -100,6 +102,7 @@ public class GameController extends Fragment {
         lifeStatus[0] = rootView.findViewById(R.id.life_icon_1);
         lifeStatus[1] = rootView.findViewById(R.id.life_icon_2);
         lifeStatus[2] = rootView.findViewById(R.id.life_icon_3);
+        btnFire = rootView.findViewById(R.id.btn_fire);
 
         trackView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -144,6 +147,13 @@ public class GameController extends Fragment {
             }
         });
 
+        btnFire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fireRocket();
+            }
+        });
+
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -172,6 +182,7 @@ public class GameController extends Fragment {
         txtRank.setTextColor(color);
         txtRankPlace.setTextColor(color);
         disconnectBtn.setColorFilter(color);
+        btnFire.setBackgroundColor(color);
 
         lifeHandler(lifeNumber);
 
@@ -181,7 +192,7 @@ public class GameController extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction();
         }
     }
 
@@ -214,7 +225,7 @@ public class GameController extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction();
     }
 
     public Emitter.Listener handleLife = new Emitter.Listener() {
@@ -238,6 +249,8 @@ public class GameController extends Fragment {
                 public void run() {
                     lifeNumber = activity.getPlayerLifeNumber();
                     lifeHandler(lifeNumber);
+                    trackView.setBackgroundColor(color);
+                    trackViewImg.setVisibility(View.INVISIBLE);
                 }
             });
         }
@@ -251,7 +264,7 @@ public class GameController extends Fragment {
                 @Override
                 public void run() {
                     int newRank = (Integer) args[0];
-                    txtRankPlace.setText(newRank);
+                    txtRankPlace.setText(String.valueOf(newRank));
                 }
             });
         }
@@ -266,10 +279,10 @@ public class GameController extends Fragment {
                 Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                    v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
                 } else {
                     //deprecated in API 26
-                    v.vibrate(50);
+                    v.vibrate(100);
                 }
             }
         }
@@ -277,6 +290,21 @@ public class GameController extends Fragment {
         if(lifes == 0){
             trackView.setBackgroundColor(inactiveColor);
             trackViewImg.setVisibility(View.VISIBLE);
+
+            Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                //deprecated in API 26
+                v.vibrate(400);
+            }
         }
+    }
+
+    public void fireRocket() {
+        mSocket.emit("client_rocket");
+        //btnFire.setBackgroundColor(inactiveColor);
+        //btnFire.setEnabled(false);
     }
 }
