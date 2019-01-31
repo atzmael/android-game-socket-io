@@ -15,6 +15,13 @@ window.onload = () => {
 		roomid: "",
 	};
 
+	if( navigator.userAgent.match(/iPhone/i)
+		|| navigator.userAgent.match(/iPad/i)
+		|| navigator.userAgent.match(/iPod/i)){
+		document.querySelector('.controller').style.height = "75vh";
+		document.querySelector('.lifes').style.fontSize = "25px";
+	}
+
 	let home = document.querySelector(".home");
 	let loginSection = document.querySelector(".login-container");
 	let controllerSection = document.querySelector(".controller");
@@ -65,23 +72,23 @@ window.onload = () => {
 					window.location.reload();
 				})
 
-				socket.on("server_lives", function(data) {
+				socket.on("server_lives", function (data) {
 					document.querySelector(".lifeNumber").textContent = data;
 
 					window.navigator.vibrate(200);
 
-					if(data == 0){
+					if (data == 0) {
 						TweenMax.set('.cross', {display: 'block'});
 						TweenMax.set('.joystick', {display: "none"});
 					}
 				});
-				socket.on("server_restart", function(){
+				socket.on("server_restart", function () {
 					document.querySelector(".lifeNumber").textContent = 3;
 					TweenMax.set('.cross', {display: 'none'});
 					TweenMax.set('.joystick', {display: "block"});
 					TweenMax.set(this, {scale: 1, opacity: 1, pointerEvents: "all"});
 				});
-				socket.on("server_rank", function(rank) {
+				socket.on("server_rank", function (rank) {
 					document.querySelector(".rankNumber").textContent = rank;
 				});
 
@@ -137,11 +144,11 @@ window.onload = () => {
 	function openFullscreen() {
 		if (elem.requestFullscreen) {
 			elem.requestFullscreen();
-		} else if (elem.mozRequestFullScreen) { /* Firefox */
+		} else if (elem.mozRequestFullScreen) {
 			elem.mozRequestFullScreen();
-		} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+		} else if (elem.webkitRequestFullscreen) {
 			elem.webkitRequestFullscreen();
-		} else if (elem.msRequestFullscreen) { /* IE/Edge */
+		} else if (elem.msRequestFullscreen) {
 			elem.msRequestFullscreen();
 		}
 	}

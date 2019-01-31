@@ -7,16 +7,16 @@
 html,
 body {
   overscroll-behavior-y: none;
+  overflow: hidden;
 }
 
-/* line 6, ../sass/partials/_general.scss */
+/* line 7, ../sass/partials/_general.scss */
 body {
   font-family: "Neon 80s", Arial, sans-serif;
   color: #00cfff;
   padding: 0;
   margin: 0;
   background-color: #1a012d;
-  overflow: hidden;
 }
 
 /* line 16, ../sass/partials/_general.scss */
@@ -28,11 +28,20 @@ body {
   display: none;
 }
 
-/* line 25, ../sass/partials/_general.scss */
+/* line 24, ../sass/partials/_general.scss */
+.state-game {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+/* line 32, ../sass/partials/_general.scss */
 .state-game .login {
   display: none;
 }
-/* line 28, ../sass/partials/_general.scss */
+/* line 35, ../sass/partials/_general.scss */
 .state-game .controller {
   display: block;
 }
