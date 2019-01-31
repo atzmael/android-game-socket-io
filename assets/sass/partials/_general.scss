@@ -1,0 +1,25 @@
+body {
+	font-family: "Neon 80s", Arial, sans-serif;
+	color: $light-blue;
+	padding: 0;
+	margin:0;
+	background-color: $deep-blue;
+}
+
+.state-login {
+	.login {
+		display: block;
+	}
+	.controller {
+		display: none;
+	}
+}
+
+.state-game {
+	.login {
+		display: none;
+	}
+	.controller {
+		display: block;
+	}
+}

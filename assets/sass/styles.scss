@@ -1,0 +1,13 @@
+@import 'partials/variables';
+@import 'partials/typography';
+@import 'partials/functions';
+
+@import 'partials/general';
+
+// APP
+@import 'partials/login';
+@import 'partials/controller';
+
+// CLIENT
+@import 'partials/home_client';
+@import 'partials/room';
