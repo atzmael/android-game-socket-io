@@ -55,7 +55,7 @@ io.on('connection', function (socket) {
 			roomId = data.roomid;
 			socket.join(roomId);
 			let color = generateHLSColor();
-			io.to(socket.id).emit("server_login_confirm", {confirm: true, color: color});
+			io.to(socket.id).emit("server_login_confirm", {confirm: true, color: color, username: data.username});
 			let playerInfo = {id: socket.id, username: data.username, color: color};
 			io.to(getRoomSocket(roomId)).emit("server_client_connected", playerInfo);
 		} else {

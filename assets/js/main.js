@@ -2,6 +2,8 @@ window.onload = () => {
 
 	let socket = io.connect("/");
 
+	let lifeNumber = 3;
+
 	let durationAnimation = 0.4;
 	let joystickAxis = {
 		x: 0,
@@ -37,22 +39,51 @@ window.onload = () => {
 				document.body.classList.remove("state-login");
 				document.body.classList.add("state-game");
 				TweenMax.to(controllerSection, durationAnimation, {display: "block"});
+				document.querySelector(".username").textContent = data.username;
 				document.querySelectorAll(".userTextUI").forEach((e) => {
-					TweenMax.to(e, 0,{color: data.color})
+					TweenMax.set(e, {color: data.color})
 				});
 				document.querySelectorAll(".userDivUI").forEach((e) => {
-					TweenMax.to(e, 0,{backgroundColor: data.color})
+					TweenMax.set(e, {backgroundColor: data.color})
 				});
+
+				TweenMax.set('.btn__container', {borderColor: data.color});
+				TweenMax.set('#svg_cross rect', {fill: data.color});
+				TweenMax.set("#svg_btn path, #svg_btn rect", {fill: data.color});
 
 				// Event
 				btn.addEventListener("touchmove", (e) => handleMove(e));
-				document.querySelector(".fireBtn").addEventListener("click", function(){
+				document.querySelector(".fireBtn").addEventListener("touchstart", function () {
 					socket.emit("client_rocket");
-					TweenMax.to(this, 0, {backgroundColor: "white"});
+					TweenMax.set(this, {backgroundColor: data.color});
+
+					TweenMax.set(this, {opacity: 0.15, pointerEvents: "none"});
+					TweenMax.fromTo(this, 3, {scale: 0}, {scale: 1});
+					TweenMax.set(this, {opacity: 1, pointerEvents: "all", delay: 3});
 				});
-				document.querySelector(".disconnect_btn").addEventListener("click", function(){
+				document.querySelector(".disconnect_btn").addEventListener("click", function () {
 					window.location.reload();
 				})
+
+				socket.on("server_lives", function(data) {
+					document.querySelector(".lifeNumber").textContent = data;
+
+					window.navigator.vibrate(200);
+
+					if(data == 0){
+						TweenMax.set('.cross', {display: 'block'});
+						TweenMax.set('.joystick', {display: "none"});
+					}
+				});
+				socket.on("server_restart", function(){
+					document.querySelector(".lifeNumber").textContent = 3;
+					TweenMax.set('.cross', {display: 'none'});
+					TweenMax.set('.joystick', {display: "block"});
+					TweenMax.set(this, {scale: 1, opacity: 1, pointerEvents: "all"});
+				});
+				socket.on("server_rank", function(rank) {
+					document.querySelector(".rankNumber").textContent = rank;
+				});
 
 			} else {
 				alert('Erreur de connexion');
@@ -62,8 +93,6 @@ window.onload = () => {
 
 
 	let btn = document.querySelector(".joystick");
-
-	let border = 10;
 
 	let lastXPosition,
 		lastYPosition;
@@ -83,8 +112,8 @@ window.onload = () => {
 		let middleX = btn.offsetLeft + btn.offsetWidth / 2;
 		let middleY = btn.offsetTop + btn.offsetHeight / 2;
 
-		joystickAxis.x = ((currPosX - middleX) / btn.offsetWidth ) * 2;
-		joystickAxis.y = ((currPosY - middleY) / btn.offsetHeight ) * 2;
+		joystickAxis.x = ((currPosX - middleX) / btn.offsetWidth) * 2;
+		joystickAxis.y = ((currPosY - middleY) / btn.offsetHeight) * 2;
 
 		joystickAxis.x = joystickAxis.x > 1 ? 1 : joystickAxis.x;
 		joystickAxis.x = joystickAxis.x < -1 ? -1 : joystickAxis.x;
@@ -97,32 +126,8 @@ window.onload = () => {
 
 		socket.emit("client_move", joystickAxis);
 
-		/*
-		if(lastXPosition < currPosX){
-			if(joystick.offsetLeft < btn.offsetLeft + btn.offsetWidth){
-				joystick.style.left = joystick.offsetLeft + (currPosX - lastXPosition) + "px";
-			}
-		}else if(lastXPosition > currPosX){
-			if(joystick.offsetLeft > btn.offsetLeft + border){
-				joystick.style.left = joystick.offsetLeft + (currPosX - lastXPosition) + "px";
-			}
-		}
-
-		if(lastYPosition < currPosY){
-			if(joystick.offsetTop < btn.offsetTop + btn.offsetHeight){
-				joystick.style.top = joystick.offsetTop + (currPosY - lastYPosition) + "px";
-			}
-		}else if(lastYPosition > currPosY){
-			if(joystick.offsetTop > currPosY){
-				joystick.style.top = joystick.offsetTop + (currPosY - lastYPosition) + "px";
-			}
-		}
-		*/
-
 		lastXPosition = currPosX;
 		lastYPosition = currPosY;
-
-		window.navigator.vibrate(200);
 	}
 
 	/* Get the documentElement (<html>) to display the page in fullscreen */

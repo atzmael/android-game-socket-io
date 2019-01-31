@@ -5,6 +5,7 @@
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Hyper Stripped Lighning Arena</title>
+	<link rel="icon" href="assets/img/favicon.ico" />
 
 	<link rel="stylesheet" href="assets/stylesheets/styles.css">
 </head>
@@ -31,21 +32,27 @@
 <section class="controller">
 	<div class="controller__container">
 		<div class="leftController">
-			<div class="disconnect_btn"><img src="assets/img/exit_button_inactive.png" alt="exit button"></div>
+			<div class="disconnect_btn">
+				<svg id="svg_btn" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><style>.cls-1{fill:#2b2046;}</style></defs><title>icon_disconnect</title><path class="cls-1" d="M25,45A20,20,0,0,1,8.81,13.26a1,1,0,0,1,1.45-.18L12.57,15a1,1,0,0,1,.17,1.41A14.68,14.68,0,0,0,10,23.94a15,15,0,1,0,27.13-7.7,1,1,0,0,1,.16-1.41l2.3-1.89a1,1,0,0,1,1.45.16A20,20,0,0,1,25,45Z" transform="translate(-5 -5)"/><rect class="cls-1" x="17.5" width="5" height="25" rx="2.5" ry="2.5"/></svg>
+			</div>
 			<button class="fireBtn userDivUI">Fire</button>
 		</div>
 		<div class="middleController">
 			<div class="username userTextUI">Pseudo</div>
 			<div class="rank userTextUI">rank : <span class="rankNumber">0</span></div>
 			<div class="lifes">
-				<div class="single_life userDivUI"></div>
-				<div class="single_life userDivUI"></div>
-				<div class="single_life userDivUI"></div>
+				<div class="userTextUI">lifes :</div>
+				<div class="lifeNumber userTextUI">3</div>
 			</div>
 		</div>
 		<div class="rightController">
 			<div class="btn__container">
-				<button class="joystick"><span class="joystick__btn userDivUI"></span></button>
+				<button class="joystick">
+					<span class="joystick__btn userDivUI"></span>
+				</button>
+				<div class="cross">
+					<svg id="svg_cross" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47 47"><defs><style>.cls-1{fill:#2b2046;}</style></defs><title>loose_icon</title><rect class="cls-1" x="-5.21" y="22.48" width="60.43" height="6.04" transform="translate(-12.21 23.15) rotate(-45)"/><rect class="cls-1" x="21.98" y="-4.71" width="6.04" height="60.43" transform="translate(-12.21 23.15) rotate(-45)"/></svg>
+				</div>
 			</div>
 		</div>
 	</div>
